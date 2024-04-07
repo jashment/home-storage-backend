@@ -11,7 +11,7 @@ const connectDB = () => {
       }
     })
     const db = client.db('storage')
-    return db
+    return { client, db }
   } catch (error) {
     console.error(error)
   }
