@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 
 app.use(
   OpenApiValidator.middleware({
-    apiSpec: './openapi.yaml',
+    apiSpec: './spec/api.spec.yaml',
     validateRequests: true,
     validateResponses: true,
   }),

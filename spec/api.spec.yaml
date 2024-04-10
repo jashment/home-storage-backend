@@ -1,61 +1,77 @@
-/api/storage:
-  get:
-    description: Get all the storage
-    responses:
-      200:
-        description: Got all storage items
-        content: application/json
-        schema: 
-          type: object
-          properties:
-            storage:
-              type: array
-              items:
-                $ref: '#/definitions/StorageItem'
-  post:
-    description: Add storage item
-    responses:
-      200:
-        description: Add storage
-        content: application/json
-        schema:
-          type: object
-          properties:
-            storage:
-              type: array
-              items:
-                $ref: '#/definitions/StorageItem'
-definitions:
-  StorageItem:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-      description:
-        type: string
-      quantity:
-        type: number
-      unit:
-        type: string
-      created_at:
-        type: string
-      updated_at:
-        type: string
-  Error:
-    type: object
-    properties:
-      message:
-        type: string
-      error:
-        type: string
-      name:
-        type: string
-      details:
-        type: string
-      statusCode:
-        type: number
-      statusMessage:
-        type: string
-  
+openapi: '3.1.0'
+info:
+  version: 1.0.0
+  title: Home Storage Backend
+  description: Typescript API for Home Storage Backend
+paths:
+  /api/storage:
+    get:
+      description: Get all the storage
+      responses:
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: '#components/schemas/StorageItem'
+          schema: 
+            type: object
+            properties:
+              storage:
+                type: array
+
+    post:
+      description: Add storage item
+      responses:
+        '200':
+          description: Add storage
+          content: application/json
+          schema:
+            type: object
+            properties:
+              storage:
+                type: array
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    
+components:
+  schemas:
+    StorageItem:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        error:
+          type: string
+        name:
+          type: string
+        details:
+          type: string
+        statusCode:
+          type: number
+        statusMessage:
+          type: string
